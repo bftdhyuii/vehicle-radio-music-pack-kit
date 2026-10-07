@@ -14,17 +14,17 @@ if not files:p.error('Input folder contains no supported audio files')
 cover='nil'
 cover_file=next((f for f in a.input.iterdir() if f.is_file() and f.name.lower() in {'cover.png','cover.jpg','cover.jpeg'}),None)
 if cover_file:
-    command=[str(a.ffmpeg),'-hide_banner','-loglevel','error','-i',str(cover_file),'-vf','crop=min(iw\\,ih):min(iw\\,ih),scale=48:48:flags=lanczos','-frames:v','1','-f','rawvideo','-pix_fmt','rgb24','pipe:1']
+    command=[str(a.ffmpeg),'-hide_banner','-loglevel','error','-i',str(cover_file),'-vf','crop=min(iw\\,ih):min(iw\\,ih),scale=96:96:flags=lanczos','-frames:v','1','-f','rawvideo','-pix_fmt','rgb24','pipe:1']
     result=subprocess.run(command,capture_output=True,creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0))
-    if result.returncode or len(result.stdout)!=48*48*3:
+    if result.returncode or len(result.stdout)!=96*96*3:
         raise RuntimeError('Cannot read cover image: '+cover_file.name)
     pixels=[tuple((v//8)*8 for v in result.stdout[i:i+3]) for i in range(0,len(result.stdout),3)]
     rectangles=[];active={}
-    for y in range(48):
+    for y in range(96):
         current={};x=0
-        while x<48:
-            color=pixels[y*48+x];end=x+1
-            while end<48 and pixels[y*48+end]==color:end+=1
+        while x<96:
+            color=pixels[y*96+x];end=x+1
+            while end<96 and pixels[y*96+end]==color:end+=1
             key=(x,end-x,color)
             if key in active:
                 rectangle=active[key];rectangle[3]+=1
@@ -32,7 +32,7 @@ if cover_file:
                 rectangle=[x,y,end-x,1,*color];rectangles.append(rectangle)
             current[key]=rectangle;x=end
         active=current
-    cover="{width=48,height=48,data='"+b''.join(bytes(rect) for rect in rectangles).hex()+"'}"
+    cover="{width=96,height=96,data='"+b''.join(bytes(rect) for rect in rectangles).hex()+"'}"
     print('Cover: '+cover_file.name+' ('+str(len(rectangles))+' rectangles)',flush=True)
 tracks=[];seen=set()
 with tempfile.TemporaryDirectory(prefix='vehicle-radio-pack-')as work:

@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.pyc
+build/
+dist/
+*.exe
+*.zip
+pack_ids.json
+last_build.log

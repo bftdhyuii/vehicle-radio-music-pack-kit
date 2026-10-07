@@ -74,5 +74,5 @@ return true
     sys.path.insert(0,str(Path(__file__).resolve().parent))
     import build_addon
     a.output.parent.mkdir(parents=True,exist_ok=True)
-    build_addon.build_package(resource,str(entry),str(uuid.uuid5(uuid.NAMESPACE_URL,resource)),str(a.output),a.name+' - Vehicle Radio Pack',description='',image=(cover_file.name.lower(),cover_file.read_bytes()) if cover_file else None)
+    build_addon.build_package(resource,str(entry),str(uuid.uuid5(uuid.NAMESPACE_URL,resource)),str(a.output),a.name+' - Vehicle Radio Pack',description='')
 print(a.output)

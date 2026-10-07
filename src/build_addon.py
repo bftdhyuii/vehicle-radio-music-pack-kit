@@ -55,7 +55,7 @@ def check_display_name(title: str) -> None:
         print("WARNING: display name is not ASCII (%r); some mod managers mishandle it" % title)
 
 
-def build_package(name, entry_path, guid, output, display_name=None, extra=None, description=None):
+def build_package(name, entry_path, guid, output, display_name=None, extra=None, description=None, image=None):
     """extra: optional {resource_name: lua_bytes} packaged alongside the entry."""
     body = entry_source(name, open(entry_path, "rb").read())
     resources = {name: A.envelope(body)}
@@ -82,6 +82,14 @@ def build_package(name, entry_path, guid, output, display_name=None, extra=None,
         "Addon/" + A.ARCHIVE_NAME + ".stream": b"",
         "Addon/" + A.ARCHIVE_NAME + ".gpu_resources": b"",
     }
+    if image is not None:
+        image_name, image_bytes = image
+        if image_name not in ('cover.png', 'cover.jpg', 'cover.jpeg'):
+            raise ValueError('Unsupported cover filename')
+        manifest['IconPath'] = image_name
+        manifest['Options'][0]['Image'] = image_name
+        files[image_name] = image_bytes
+        files['manifest.json'] = (json.dumps(manifest, indent=2) + '\n').encode()
     out = os.path.abspath(output)
     os.makedirs(os.path.dirname(out), exist_ok=True)
     with zipfile.ZipFile(out, "w", compression=zipfile.ZIP_DEFLATED) as z:

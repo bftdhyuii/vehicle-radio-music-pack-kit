@@ -17,7 +17,7 @@ def build(language, ffmpeg):
         "--windowed", "--onedir", "--name", name,
         "--contents-directory", "Tools",
         "--paths", str(ROOT / "src"),
-        "--add-data", str(ROOT / "src" / "build_music_pack.py") + ";.",
+        "--add-data", str(ROOT / "src" / ("zh/build_music_pack.py" if chinese else "build_music_pack.py")) + ";.",
         "--distpath", str(output),
         "--workpath", str(ROOT / "build" / language / "work"),
         "--specpath", str(ROOT / "build" / language),

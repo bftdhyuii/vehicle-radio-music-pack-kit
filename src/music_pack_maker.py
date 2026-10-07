@@ -56,14 +56,14 @@ def show_gui():
     import tkinter as tk
     from tkinter import ttk,filedialog,messagebox
     ROOT.mkdir(parents=True,exist_ok=True)
-    (ROOT/'Music').mkdir(exist_ok=True)
+    (ROOT/'Input').mkdir(exist_ok=True)
     (ROOT/'Output').mkdir(exist_ok=True)
     root=tk.Tk();root.title('Vehicle Radio - Music Pack Builder');root.geometry('600x360');root.minsize(600,360)
     frame=ttk.Frame(root,padding=22);frame.pack(fill='both',expand=True)
     frame.columnconfigure(0,weight=1)
     ttk.Label(frame,text='Build a music pack',font=('Segoe UI',16)).grid(row=0,column=0,columnspan=2,sticky='w',pady=(0,14))
-    ttk.Label(frame,text='Music folder').grid(row=1,column=0,columnspan=2,sticky='w')
-    folder=tk.StringVar(value=str(ROOT/'Music'))
+    ttk.Label(frame,text='Input folder').grid(row=1,column=0,columnspan=2,sticky='w')
+    folder=tk.StringVar(value=str(ROOT/'Input'))
     ttk.Entry(frame,textvariable=folder).grid(row=2,column=0,sticky='ew',pady=(7,12))
     browse=ttk.Button(frame,text='Browse...',command=lambda:choose_folder())
     browse.grid(row=2,column=1,padx=(8,0))
@@ -76,7 +76,7 @@ def show_gui():
     progress.grid(row=6,column=0,columnspan=2,sticky='ew',pady=(12,8))
     ttk.Label(frame,textvariable=status,wraplength=550).grid(row=7,column=0,columnspan=2,sticky='w')
     def choose_folder():
-        selected=filedialog.askdirectory(initialdir=folder.get(),title='Select music folder')
+        selected=filedialog.askdirectory(initialdir=folder.get(),title='Select input folder')
         if selected:folder.set(selected)
     def worker(pack_name,music_folder):
         try:events.put((True,generate(pack_name,music_folder)))
@@ -102,7 +102,7 @@ def show_gui():
     def close():
         if busy:messagebox.showinfo('Build in progress','A build is still running. Close the application once it finishes.',parent=root)
         else:root.destroy()
-    ttk.Label(frame,text='Optional cover: add cover.png or cover.jpg to your music folder.',wraplength=550).grid(row=8,column=0,columnspan=2,sticky='w',pady=(8,0))
+    ttk.Label(frame,text='Optional cover: add cover.png or cover.jpg to your input folder.',wraplength=550).grid(row=8,column=0,columnspan=2,sticky='w',pady=(8,0))
     root.protocol('WM_DELETE_WINDOW',close);poll();root.mainloop()
 
 if __name__=='__main__':

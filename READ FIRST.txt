@@ -2,7 +2,7 @@ Vehicle Radio Music Pack Kit
 
 Make a pack in three steps:
 
-1. Put your songs in the Music folder.
+1. Put your songs in the Input folder.
 2. Open Music Pack Builder.exe and enter a pack name.
 3. Click Build Pack. Your finished ZIP will be in Output.
 
@@ -35,7 +35,7 @@ its identity. A different name creates a separate pack.
 
 FOLDERS
 
-Music   - Your songs and optional cover.
+Input   - Your songs and optional cover.
 Output  - Finished music pack ZIPs.
 Tools   - Files needed by the builder. Keep this folder intact.
 

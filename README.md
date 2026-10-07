@@ -7,7 +7,7 @@ Choose a folder, enter a pack name, and click **Build Pack**. The tool converts 
 ## Using the kit
 
 1. Extract the entire kit. Keep the `Tools` folder beside the EXE.
-2. Put songs in `Music`, or use **Browse** to choose another folder.
+2. Put songs in `Input`, or use **Browse** to choose another folder.
 3. Open `Music Pack Builder.exe`.
 4. Enter a pack name and click **Build Pack**.
 5. Share the ZIP from `Output`.

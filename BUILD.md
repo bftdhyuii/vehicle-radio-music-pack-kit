@@ -25,7 +25,7 @@ Replace the FFmpeg path with the location on your computer. The English kit is b
 dist/Vehicle Radio Music Pack Kit/Music Pack Builder.exe
 ```
 
-The output folder contains `READ FIRST.txt`, the EXE, its `Tools` runtime, FFmpeg, and empty `Music` and `Output` folders. Source and build documentation stay in the repository. Distribute the whole folder. The EXE cannot run on its own.
+The output folder contains `README.txt` and `先读这个.txt`, the EXE, its `Tools` runtime, FFmpeg, and empty `Input` and `Output` folders. Source and build documentation stay in the repository. Distribute the whole folder. The EXE cannot run on its own.
 
 Python and PyInstaller versions affect the generated binary, so these commands reproduce the build process rather than guarantee a byte-for-byte identical EXE.
 

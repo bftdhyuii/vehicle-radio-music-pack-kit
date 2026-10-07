@@ -29,13 +29,14 @@ def build(ffmpeg):
     destination = ROOT / "dist" / title
     shutil.copytree(output / name, destination, dirs_exist_ok=True)
     shutil.copy2(ffmpeg, destination / "Tools" / "ffmpeg.exe")
-    for folder in ("Music", "Output"):
+    for folder in ("Input", "Output"):
         (destination / folder).mkdir(exist_ok=True)
-    shutil.copy2(ROOT / "READ FIRST.txt", destination / "READ FIRST.txt")
+    for document in ("README.txt", "先读这个.txt"):
+        shutil.copy2(ROOT / document, destination / document)
     shutil.copy2(ROOT / "THIRD_PARTY.md", destination / "Tools" / "Dependencies.md")
     for license_file in (ROOT / "licenses").iterdir():
         shutil.copy2(license_file, destination / "Tools" / license_file.name)
-    for name in ("README.md", "README.txt", "BUILD.md", "THIRD_PARTY.md"):
+    for name in ("README.md", "READ FIRST.txt", "BUILD.md", "THIRD_PARTY.md"):
         (destination / name).unlink(missing_ok=True)
     print("Kit ready: " + str(destination))
 

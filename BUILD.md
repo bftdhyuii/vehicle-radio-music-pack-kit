@@ -19,16 +19,13 @@ py -3.14 -m venv .venv
 .\.venv\Scripts\python.exe build.py --ffmpeg "C:\ffmpeg\bin\ffmpeg.exe"
 ```
 
-Replace the FFmpeg path with the location on your computer. The command builds both editions:
+Replace the FFmpeg path with the location on your computer. The English kit is built at:
 
 ```text
 dist/Vehicle Radio Music Pack Kit/Music Pack Builder.exe
-dist/Vehicle Radio Music Pack Kit Chinese/Music Pack Maker.exe
 ```
 
-To build just one edition, add `--language en` or `--language zh`.
-
-Each output folder contains the EXE, its `Tools` runtime, FFmpeg, and empty `Music` and `Output` folders. Distribute the whole folder. The EXE cannot run on its own.
+The output folder contains `READ FIRST.txt`, the EXE, its `Tools` runtime, FFmpeg, and empty `Music` and `Output` folders. Source and build documentation stay in the repository. Distribute the whole folder. The EXE cannot run on its own.
 
 Python and PyInstaller versions affect the generated binary, so these commands reproduce the build process rather than guarantee a byte-for-byte identical EXE.
 

@@ -8,7 +8,7 @@ Choose a folder, enter a pack name, and click **Build Pack**. The tool converts 
 
 1. Extract the entire kit. Keep the `Tools` folder beside the EXE.
 2. Put songs in `Music`, or use **Browse** to choose another folder.
-3. Open `Music Pack Builder.exe` (English) or `Music Pack Maker.exe` (Chinese).
+3. Open `Music Pack Builder.exe`.
 4. Enter a pack name and click **Build Pack**.
 5. Share the ZIP from `Output`.
 
@@ -20,18 +20,17 @@ Players need **Bingus Shared Loader** and **Vehicle Radio Framework**. They do n
 
 ## Source and builds
 
-Both GUI editions and the pack builder are included in `src`. See [BUILD.md](BUILD.md) for the Windows build commands and [THIRD_PARTY.md](THIRD_PARTY.md) for dependencies.
+The English GUI and pack builder are included in `src`. See [BUILD.md](BUILD.md) for the Windows build commands and [THIRD_PARTY.md](THIRD_PARTY.md) for dependencies.
 
 The repository contains no music or game assets.
 
 ## Files
 
 - `src/music_pack_maker.py`: English GUI and build worker.
-- `src/music_pack_maker_zh.py`: Chinese GUI and build worker.
 - `src/build_music_pack.py`: audio conversion and music-pack generation.
 - `src/build_addon.py`: mod manifest and ZIP packaging.
 - `src/hd2_archive.py`: Lua resource archive writer.
-- `build.py`: builds either or both Windows kits.
+- `build.py`: builds the English Windows kit.
 
 Audio is converted to mono, 22,050 Hz, 16-bit PCM and embedded in the Lua addon. Finished packs can be larger than the original compressed songs.
 

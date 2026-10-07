@@ -34,3 +34,7 @@ The repository contains no music or game assets.
 - `build.py`: builds either or both Windows kits.
 
 Audio is converted to mono, 22,050 Hz, 16-bit PCM and embedded in the Lua addon. Finished packs can be larger than the original compressed songs.
+
+## Cover images
+
+Put `cover.png`, `cover.jpg`, or `cover.jpeg` in the music folder and rebuild the pack. The image is cropped to a square and embedded automatically. Vehicle Radio Framework v0.4.0 displays it above the pack name in the wheel center. The HUD preview is 48 x 48 pixels; it is not a full-resolution texture. Packs without a cover still work.

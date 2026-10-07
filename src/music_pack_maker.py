@@ -102,6 +102,7 @@ def show_gui():
     def close():
         if busy:messagebox.showinfo('Build in progress','A build is still running. Close the application once it finishes.',parent=root)
         else:root.destroy()
+    ttk.Label(frame,text='Optional cover: add cover.png or cover.jpg to your music folder.',wraplength=550).grid(row=8,column=0,columnspan=2,sticky='w',pady=(8,0))
     root.protocol('WM_DELETE_WINDOW',close);poll();root.mainloop()
 
 if __name__=='__main__':

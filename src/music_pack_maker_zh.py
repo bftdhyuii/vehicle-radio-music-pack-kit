@@ -102,6 +102,7 @@ def show_gui():
     def close():
         if busy:messagebox.showinfo('正在生成','请等音乐包生成完成后再关闭工具.',parent=root)
         else:root.destroy()
+    ttk.Label(frame,text='可选封面: 在歌曲文件夹里放入 cover.png 或 cover.jpg.',wraplength=550).grid(row=8,column=0,columnspan=2,sticky='w',pady=(8,0))
     root.protocol('WM_DELETE_WINDOW',close);poll();root.mainloop()
 
 if __name__=='__main__':

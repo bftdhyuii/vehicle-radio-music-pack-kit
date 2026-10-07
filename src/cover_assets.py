@@ -1,7 +1,7 @@
 """Compile a square RGBA cover into Stingray GUI texture/material resources.
 
-The GUI material layout and shader identifiers follow the native icon material
-format used by HD2 HUD Plus. No runtime Lua from that mod is included.
+The GUI material layout and shader identifier match the game native
+content/ui/shared/material/gui_diffuse_map resource.
 """
 import struct
 from hd2_archive import resource_hash
@@ -21,16 +21,11 @@ def compile_cover(resource, rgba):
     dds = b'DDS ' + struct.pack('<31I', *header)
     dds += struct.pack('<5I', 28, 3, 0, 1, 0)  # RGBA8, Texture2D, one layer
     texture = b'\0' * 8 + b'\xff' * 4 + b'\0' * 180 + dds
-    material = bytearray(304)
-    struct.pack_into('<4I', material, 0, 0x120, 1, 24, 268)
+    material = bytearray(160)
+    struct.pack_into('<4I', material, 0, 0x120, 1, 24, 124)
     struct.pack_into('<I', material, 64, 1)  # texture count
-    struct.pack_into('<I', material, 104, 4)  # vector settings
-    struct.pack_into('<I', material, 120, 64)
-    struct.pack_into('<QIQ', material, 128, 0x3461FF0D, 0x3AA8B87E,
+    struct.pack_into('<QIQ', material, 128, 0xBA25DE35, 0x3AA8B87E,
                      resource_hash(texture_name))
-    for i, usage in enumerate((0x28723F4D, 0x851FD4FD, 0x10C353AF, 0xAC74FE45)):
-        struct.pack_into('<5I', material, 148 + i * 20, 3, 0, usage, i * 16, 0)
-    struct.pack_into('<8f', material, 228, *([1.0] * 8))
     return material_name, [
         (texture_name, 'texture', texture, rgba),
         (material_name, 'material', bytes(material), b''),

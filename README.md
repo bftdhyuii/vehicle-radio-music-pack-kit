@@ -37,6 +37,6 @@ Audio is converted to mono, 22,050 Hz, 16-bit PCM and embedded in the Lua addon.
 
 ## Cover images
 
-Put `cover.png`, `cover.jpg`, or `cover.jpeg` in the music folder and rebuild the pack. The image is cropped to a square and embedded automatically. Vehicle Radio Framework v0.4.1 displays it above the pack name in the wheel center. The HUD preview is 96 x 96 pixels; it is not a full-resolution texture. Packs without a cover still work.
+Put `cover.png`, `cover.jpg`, or `cover.jpeg` in the music folder and rebuild the pack. The image is cropped to a square and embedded automatically. Vehicle Radio Framework v0.4.2 displays it above the pack name in the wheel center. The English kit builds a 512 x 512 game texture, displayed as one image. Use a square 512 x 512 or 1024 x 1024 source for best results. Packs without a cover still work.
 
 The English kit also includes the original cover image in the generated mod ZIP and sets it as the mod manager preview. The mod description stays empty.

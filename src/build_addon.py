@@ -55,13 +55,18 @@ def check_display_name(title: str) -> None:
         print("WARNING: display name is not ASCII (%r); some mod managers mishandle it" % title)
 
 
-def build_package(name, entry_path, guid, output, display_name=None, extra=None, description=None, image=None):
+def build_package(name, entry_path, guid, output, display_name=None, extra=None, description=None, image=None, assets=None):
     """extra: optional {resource_name: lua_bytes} packaged alongside the entry."""
     body = entry_source(name, open(entry_path, "rb").read())
     resources = {name: A.envelope(body)}
     for extra_name, extra_body in (extra or {}).items():
         resources[extra_name] = A.envelope(entry_source(extra_name, extra_body))
-    archive = A.make_archive(resources)
+    gpu = b''
+    if assets:
+        from cover_assets import make_archive
+        archive, gpu = make_archive([(n, 'lua', r, b'') for n, r in resources.items()] + assets)
+    else:
+        archive = A.make_archive(resources)
 
     guid = str(uuid.UUID(guid))
     title = display_name or name
@@ -80,7 +85,7 @@ def build_package(name, entry_path, guid, output, display_name=None, extra=None,
         "manifest.json": (json.dumps(manifest, indent=2) + "\n").encode(),
         "Addon/" + A.ARCHIVE_NAME: archive,
         "Addon/" + A.ARCHIVE_NAME + ".stream": b"",
-        "Addon/" + A.ARCHIVE_NAME + ".gpu_resources": b"",
+        "Addon/" + A.ARCHIVE_NAME + ".gpu_resources": gpu,
     }
     if image is not None:
         image_name, image_bytes = image

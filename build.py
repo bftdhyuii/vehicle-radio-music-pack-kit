@@ -22,7 +22,7 @@ def build(language, ffmpeg):
         "--workpath", str(ROOT / "build" / language / "work"),
         "--specpath", str(ROOT / "build" / language),
     ]
-    for module in ("build_addon", "hd2_archive", "wave", "hashlib", "math", "tempfile"):
+    for module in ("build_addon", "hd2_archive", "cover_assets", "wave", "hashlib", "math", "tempfile"):
         command.extend(("--hidden-import", module))
     command.append(str(ROOT / "src" / entry))
     subprocess.run(command, cwd=ROOT, check=True)
